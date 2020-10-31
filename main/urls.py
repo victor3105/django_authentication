@@ -21,6 +21,8 @@ import auth.views
 
 urlpatterns = [
     path('', auth.views.home),
-    path('admin/', admin.site.urls),
-    path('signup/', auth.views.signup),
+    path('admin/', admin.site.urls, name='logout'),
+    path('signup/', auth.views.signup, name='signup'),
+    path('login/', auth.views.login, name='login'),
+    path('logout/', auth.views.logout, name='logout')
 ]

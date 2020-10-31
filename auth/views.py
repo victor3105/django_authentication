@@ -13,3 +13,15 @@ def signup(request):
         request,
         'signup.html'
     )
+
+
+def login(request):
+    return render(
+        request
+    )
+
+
+def logout(request):
+    return render(
+        request
+    )
