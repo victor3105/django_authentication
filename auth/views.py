@@ -1,8 +1,9 @@
 from django.contrib import messages
+# from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse
+from .forms import SignupForm, LoginForm
 
 
 def home(request):
@@ -17,18 +18,13 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect(reverse('home'))
     else:
-        form = UserCreationForm()
+        form = SignupForm()
     context = {'form': form}
-    # user = User.objects.create_user(username=username, password=password)
-    # user = authenticate(request, username=username, password=password)
-    # if user is not None:
-    #     login(request, user)
-    #     redirect('home')
     return render(
         request,
         'signup.html',
@@ -38,6 +34,7 @@ def signup(request):
 
 class Login(LoginView):
     template_name = 'login.html'
+    form_class = LoginForm
 
 
 class Logout(LogoutView):
